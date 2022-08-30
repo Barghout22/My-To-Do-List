@@ -1,5 +1,20 @@
+@font-face{
+    font-family: My-Goth-Font;
+    src: url("../src/Nanum_Gothic/NanumGothic-Regular.ttf");
+}
+@font-face{
+    font-family: My-Goth-Font-heavy;
+    src: url("../src/Nanum_Gothic/NanumGothic-Bold.ttf");
+}
+
+@font-face{
+    font-family: My-Goth-Font-extra-heavy;
+    src: url("../src/Nanum_Gothic/NanumGothic-ExtraBold.ttf");
+}
+
 .pageContainer
 {
+    font-family: My-Goth-font-extra-heavy;
     width: 100vw;
     height: 100vh;
     display: grid;
