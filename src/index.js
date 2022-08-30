@@ -4,14 +4,13 @@ import{displayAdditionForm,DisplayToDo,clearDivContainer} from "./div-manipulati
 
 const mainDisplay=document.querySelector(".mainDisplay");
 const todoAddbtn=document.querySelector(".addToDos");
-let submit;
 
 todoAddbtn.addEventListener('click',()=>{
     clearDivContainer(mainDisplay);
     displayAdditionForm(mainDisplay);
-    submit=document.querySelector(".submissionButton");
+
+  const submit=document.querySelector(".submissionButton");
+  submit.addEventListener('click',()=>console.log(document.querySelectorAll("input").values));
 
 });
 
-
-    submit.addEventListener('click',()=>console.log("aye aye captain!"));

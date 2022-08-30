@@ -1,4 +1,4 @@
-export const ToDoListItemCreator=(title,priorty,notes,dueDate)=>
+export const ToDoListItemCreator=(title,priorty,notes,dueDate,dueTime)=>
 {
-return{title,priorty,notes,dueDate};
+return{title,priorty,notes,dueDate,dueTime};
 }

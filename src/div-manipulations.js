@@ -22,19 +22,26 @@ export function displayAdditionForm(parentDiv){
     priortySetter.add(high,undefined);
     myToDoForm.appendChild(priortySetter);
 
-    AddLabel("dueDate"," Due Date: ",myToDoForm)
+    AddLabel("dueDate"," Due Date: ",myToDoForm);
     const dueDate=document.createElement("input");
     dueDate.type="date";
     dueDate.setAttribute("id","dueDate");
     dueDate.name="dueDate";
     myToDoForm.appendChild(dueDate);
 
+    AddLabel("dueTime","Due time:",myToDoForm);
+    const dueTime=document.createElement("input");
+    dueTime.type="time";
+    dueTime.setAttribute("id","dueTime");
+    dueTime.name="dueTime";myToDoForm.appendChild(dueTime)
+
+
     AddLabel("notes"," Additional notes: ",myToDoForm);
     const additionalNotes=document.createElement("textarea");
     additionalNotes.setAttribute("id","notes");
     additionalNotes.setAttribute("name","notes");
     additionalNotes.setAttribute("rows",2);
-    additionalNotes.setAttribute("cols",30);
+    additionalNotes.setAttribute("cols",50);
     myToDoForm.appendChild(additionalNotes);
 
     const submitBttn=document.createElement("button");

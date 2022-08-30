@@ -44,3 +44,28 @@
     grid-row: 2/3;
     padding-left: 3vw;
 }
+
+.displayForm
+{
+    padding: 2vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 2fr;
+
+    gap: 10px;
+    text-align: center;
+
+
+}
+
+.submissionButton
+{
+    grid-column: 4/5;
+
+}
+
+#notes
+{
+grid-column: 2/4;
+
+}
