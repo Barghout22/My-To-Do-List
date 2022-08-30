@@ -1,0 +1,31 @@
+.pageContainer
+{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr 8fr;
+
+}
+.header{
+    grid-column: 2/3;
+    grid-row: 1/2;
+    background-color: aqua;
+    padding: 1em;
+}
+
+.sidebar{
+    grid-column: 1/2;
+    grid-row: 1/3;
+    background-color: bisque;
+    padding: 1em;
+
+}
+
+.mainDisplay{
+    grid-column: 2/3;
+    grid-row: 2/3;
+    background-color: blueviolet;
+    padding: 1em;
+
+}
