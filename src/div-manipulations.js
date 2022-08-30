@@ -4,11 +4,12 @@ export function displayAdditionForm(parentDiv){
     const myToDoForm=document.createElement('div');
     myToDoForm.classList.add('displayForm');
     
-    AddLabel("title"," My goal:",myToDoForm);
+    AddLabel("title"," New Task:",myToDoForm);
     const titleInput=document.createElement("input");
     titleInput.type="text";
     titleInput.setAttribute("id","title");
     titleInput.name="title";
+    titleInput.value=" ";
     myToDoForm.appendChild(titleInput);
 
     AddLabel("priorty"," select a level of priorty:",myToDoForm);

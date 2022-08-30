@@ -10,7 +10,14 @@ todoAddbtn.addEventListener('click',()=>{
     displayAdditionForm(mainDisplay);
 
   const submit=document.querySelector(".submissionButton");
-  submit.addEventListener('click',()=>console.log(document.querySelectorAll("input").values));
+  submit.addEventListener('click',()=>{
+    if((document.getElementById("title")).value===" ")
+    {alert("please enter a task");}
+else
+{
+    console.log(document.getElementById("title").value);
+}    
+});
 
 });
 
