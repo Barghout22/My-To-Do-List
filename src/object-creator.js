@@ -12,3 +12,5 @@ export function updateNewTodosToList(title,priorty,notes,dueDate,dueTime)
     listOfToDos.push(newToDo);
     console.log(listOfToDos);
 }
+
+//export function deleteToDos()

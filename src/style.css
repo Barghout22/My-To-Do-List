@@ -29,14 +29,18 @@
     grid-row: 1/2;
     background-color: #5eead4;
     align-self: center;
-    padding-left: 3vw;
+    padding: 1vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .sidebar{
     grid-column: 1/2;
     grid-row: 2/3;
     box-shadow: 1px 1px #a3a3a3;
-    padding-left: 3vw;
+    padding: 2vw;
+    font-size: 1.5em;
 }
 
 .mainDisplay{
@@ -70,4 +74,36 @@ grid-column: 2/4;
 
 }
 
+.toDoDisplayDiv
+{
+    padding: 1vw;
 
+}
+
+.sidebarItem
+{
+    margin-bottom: 2vh;
+}
+
+.activeGoals:hover
+{
+    background-color: #e5e7eb;
+
+}
+
+.ProjectItem:hover
+{
+    background-color: #e5e7eb;
+
+}
+
+.toDoDispDiv
+{
+width: 95%;
+padding: 1vw;
+display: grid;
+grid-template-columns: 8fr 1fr 1fr;
+gap: 0.5vw;
+border-bottom: #a3a3a3 dotted 1px;
+
+}

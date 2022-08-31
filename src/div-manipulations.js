@@ -9,7 +9,7 @@ export function displayAdditionForm(parentDiv){
     titleInput.type="text";
     titleInput.setAttribute("id","title");
     titleInput.name="title";
-    titleInput.value=" ";
+    //titleInput.value=" ";
     myToDoForm.appendChild(titleInput);
 
     AddLabel("priorty"," select a level of priorty:",myToDoForm);
@@ -28,10 +28,11 @@ export function displayAdditionForm(parentDiv){
     dueDate.type="date";
     dueDate.setAttribute("id","dueDate");
     dueDate.name="dueDate";
-   // let today=new Date();
-    dueDate.value=new Date().toISOString().substring(0, 10);
-    //`${today.getFullYear()}-${(today.getMonth()+1)}-${today.getDate()}`;
-    myToDoForm.appendChild(dueDate);
+   //let today=new Date();
+   dueDate.value=new Date().toISOString().substring(0, 10);
+   //dueDate.value=`${today.getFullYear()}-${(today.getMonth()+1)}-${today.getDate()}`;
+   
+   myToDoForm.appendChild(dueDate);
 
     AddLabel("dueTime","Due time:",myToDoForm);
     const dueTime=document.createElement("input");
@@ -78,8 +79,32 @@ else{
 for(let i=0;i<(toDoList.length);i++)
 {
     const todoDiv=document.createElement('div');
-    todoDiv.classList.add('toDoDisplayDiv');
-    todoDiv.textContent=`${toDoList[i].title}  ${toDoList[i].dueTime} ${toDoList[i].dueDate}  ${toDoList[i].priorty} priorty`
+    const title=toDoList[i].title;
+    todoDiv.classList.add("toDoDispDiv");
+    todoDiv.setAttribute("id",title);
+
+    const paragraphOne=document.createElement('div');
+    const paragraphtwo=document.createElement('div');
+
+    paragraphOne.textContent=`${toDoList[i].dueDate}: ${toDoList[i].title}`+'   '+`--- due by(24 hour format): ${toDoList[i].dueTime} --priorty ${toDoList[i].priorty}`;
+    paragraphtwo.textContent=`   Additional notes: ${toDoList[i].notes}`;
+
+    const completedBttn=document.createElement("button");
+    completedBttn.classList.add("questComplete");
+    completedBttn.setAttribute("id",`${toDoList[i].title}`);
+    completedBttn.textContent="mark as complete";
+
+    const deleteBttn=document.createElement("button");
+    deleteBttn.classList.add("questdelete");
+    deleteBttn.setAttribute("id",`${toDoList[i].title}`);
+    deleteBttn.textContent="delete this task";
+
+
+
+    todoDiv.appendChild(paragraphOne);
+    todoDiv.appendChild(completedBttn);
+    todoDiv.appendChild(deleteBttn);
+    todoDiv.appendChild(paragraphtwo);
     parentDiv.appendChild(todoDiv);
 }
 
