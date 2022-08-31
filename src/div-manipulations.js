@@ -28,13 +28,18 @@ export function displayAdditionForm(parentDiv){
     dueDate.type="date";
     dueDate.setAttribute("id","dueDate");
     dueDate.name="dueDate";
+   // let today=new Date();
+    dueDate.value=new Date().toISOString().substring(0, 10);
+    //`${today.getFullYear()}-${(today.getMonth()+1)}-${today.getDate()}`;
     myToDoForm.appendChild(dueDate);
 
     AddLabel("dueTime","Due time:",myToDoForm);
     const dueTime=document.createElement("input");
     dueTime.type="time";
     dueTime.setAttribute("id","dueTime");
-    dueTime.name="dueTime";myToDoForm.appendChild(dueTime)
+    dueTime.name="dueTime";
+    dueTime.defaultValue="00:00";
+    myToDoForm.appendChild(dueTime)
 
 
     AddLabel("notes"," Additional notes: ",myToDoForm);
@@ -43,6 +48,7 @@ export function displayAdditionForm(parentDiv){
     additionalNotes.setAttribute("name","notes");
     additionalNotes.setAttribute("rows",2);
     additionalNotes.setAttribute("cols",50);
+    additionalNotes.value=" ";
     myToDoForm.appendChild(additionalNotes);
 
     const submitBttn=document.createElement("button");
@@ -55,11 +61,30 @@ export function displayAdditionForm(parentDiv){
     parentDiv.appendChild(myToDoForm);
 }
 
-export function DisplayToDo(toDoObject)
+
+
+
+export function DisplayToDo(parentDiv,toDoList)
 {
-const todoDiv=document.createElement('div');
-todoDiv.classList.add('toDoDisplayDiv');
-todoDiv.textContent=toDoObject.title;
+
+if(toDoList.length===0)
+{
+    const introHeader=document.createElement("h3");
+    introHeader.textContent="You have nothing to do yet! Add a task!";
+    parentDiv.appendChild(introHeader);    
+
+}
+else{
+for(let i=0;i<(toDoList.length);i++)
+{
+    const todoDiv=document.createElement('div');
+    todoDiv.classList.add('toDoDisplayDiv');
+    todoDiv.textContent=`${toDoList[i].title}  ${toDoList[i].dueTime} ${toDoList[i].dueDate}  ${toDoList[i].priorty} priorty`
+    parentDiv.appendChild(todoDiv);
+}
+
+}
+
 
 }
 
@@ -73,6 +98,7 @@ while(container.firstChild)
 }
 
 }
+
 
 function AddLabel(inputName,displayText,parent)
 {

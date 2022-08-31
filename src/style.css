@@ -70,11 +70,4 @@ grid-column: 2/4;
 
 }
 
-.activeGoals,.projects{
-
-width: 10em;
-height: 3em;
-border: 2px solid grey;
-margin: 2px;
-}
 

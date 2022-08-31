@@ -1,12 +1,14 @@
 import './style.css';
-import {ToDoListItemCreator} from "./object-creator";
+import {updateNewTodosToList,listOfToDos} from "./object-creator";
 import{displayAdditionForm,DisplayToDo,clearDivContainer} from "./div-manipulations";
+
 
 const mainDisplay=document.querySelector(".mainDisplay");
 const todoAddbtn=document.querySelector(".addToDos");
 
+DisplayToDo(mainDisplay,listOfToDos);
+
 todoAddbtn.addEventListener('click',()=>{
-    clearDivContainer(mainDisplay);
     displayAdditionForm(mainDisplay);
 
   const submit=document.querySelector(".submissionButton");
@@ -15,8 +17,11 @@ todoAddbtn.addEventListener('click',()=>{
     {alert("please enter a task");}
 else
 {
-    console.log(document.getElementById("title").value);
-}    
+    updateNewTodosToList((document.getElementById("title").value),(document.getElementById("priorty").value),(document.getElementById("notes").value),(document.getElementById("dueDate").value),(document.getElementById("dueTime").value));
+    clearDivContainer(mainDisplay);
+    DisplayToDo(mainDisplay,listOfToDos);
+
+  }    
 });
 
 });
