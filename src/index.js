@@ -40,5 +40,18 @@ else
 
 });
 
+const SidebarBttns=document.querySelectorAll(".sidebarItem");
+
+SidebarBttns.forEach(bttn=>bttn.addEventListener('click',()=>{
+  if(bttn['id']==='activeGoals')
+    {
+      clearDivContainer(mainDisplay);
+      DisplayToDo(mainDisplay,listOfToDos);
+    }
+
+    else{
+    console.log("hello");
+  }
+}));
 
 

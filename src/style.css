@@ -85,7 +85,7 @@ grid-column: 2/4;
     margin-bottom: 2vh;
 }
 
-.activeGoals:hover
+#activeGoals:hover
 {
     background-color: #e5e7eb;
 
