@@ -1,5 +1,6 @@
 import { deleteToDos,getProjectItems} from "./object-creator";
-let duplicationPreventionLocal=0;
+import { duplicationPrevention } from "./index";
+export let duplicationPreventionLocal=0;
 //first function dynamically displays a form to capture new todos  
 export function displayAdditionForm(parentDiv,projectList){
     
@@ -124,7 +125,7 @@ for(let i=0;i<(toDoList.length);i++)
     paragraphOne.textContent+=` ${toDoList[i].title} priorty: ${toDoList[i].priorty}`;
     if((toDoList[i].dueTime)!=="00:00")
     {
-        paragraphOne.textContent+=`_____due by: ${toDoList[i].dueTime} o'clock`;
+        paragraphOne.textContent+=` due by: ${toDoList[i].dueTime} o'clock`;
     }
 
     paragraphtwo.textContent=`   Additional notes: ${toDoList[i].notes}`;
@@ -249,6 +250,8 @@ for(let i=0;i<(projectList.length);i++)
     parent.appendChild(projectItem);
 
 projectItem.addEventListener('click',()=>{
+    duplicationPrevention=0;
+    duplicationPreventionLocal=0
     //console.log(projectItem['id'])
     const filteredList=getProjectItems(projectItem['id'])
     clearDivContainer(mainDisp);

@@ -1,8 +1,9 @@
 import './style.css';
 import {updateNewTodosToList,listOfToDos,projectList,getProjectItems} from "./object-creator";
 import{displayAdditionForm,DisplayToDo,clearDivContainer,addNewProject,displaySideBarProjects} from "./div-manipulations";
+import { duplicationPreventionLocal } from './div-manipulations';
 
-let duplicationPrevention=0; 
+export let duplicationPrevention=0; 
 
 const mainDisplay=document.querySelector(".mainDisplay");
 const todoAddbtn=document.querySelector(".addToDos");
@@ -44,6 +45,7 @@ else
     clearDivContainer(mainDisplay);
     DisplayToDo(mainDisplay,listOfToDos);
     duplicationPrevention=0;
+    duplicationPreventionLocal=0;
   }    
 });
 
@@ -52,7 +54,8 @@ else
 const activeGoalsBttn=document.querySelector("#activeGoals");
 
 activeGoalsBttn.addEventListener('click',()=>{
-  
+  duplicationPrevention=0;
+  duplicationPreventionLocal=0;
   clearDivContainer(mainDisplay);
   DisplayToDo(mainDisplay,listOfToDos);
 });

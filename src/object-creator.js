@@ -11,6 +11,9 @@ export function updateNewTodosToList(title,priorty,notes,dueDate,dueTime,project
 //    console.log(newToDo);
     listOfToDos.push(newToDo);
     //console.log(listOfToDos);
+
+    listOfToDos.sort(sortByDateAndPriorty);
+
 }
 
 export function deleteToDos(title)
@@ -30,3 +33,24 @@ export function getProjectItems(project)
     return filteredList;
 
 }
+
+
+
+function sortByDateAndPriorty( a, b )
+{
+if ( a.date < b.date){
+  return -1;
+}
+if ( a.date> b.date){
+  return 1;
+}
+if ( (a.priorty==="high")&& (b.priorty==="low")){
+    return -1;
+  }
+  if ( (a.priorty==="low")&&( b.priorty==="high")){
+    return 1;
+  }
+
+return 0;
+}
+
