@@ -110,12 +110,18 @@ for(let i=0;i<(toDoList.length);i++)
     const completedBttn=document.createElement("button");
     completedBttn.classList.add("questComplete");
     completedBttn.setAttribute("id",`${toDoList[i].title}`);
-    completedBttn.textContent="mark as complete";
-
+    
+    const checkMark=document.createElement('img');
+    checkMark.src="./check-outline.png";
+    completedBttn.appendChild(checkMark);
+    
     const deleteBttn=document.createElement("button");
     deleteBttn.classList.add("questdelete");
     deleteBttn.setAttribute("id",`${toDoList[i].title}`);
-    deleteBttn.textContent="delete this task";
+
+    const deleteIcon=document.createElement('img');
+    deleteIcon.src='./file-document-remove.png';
+    deleteBttn.appendChild(deleteIcon);
 
 
 
