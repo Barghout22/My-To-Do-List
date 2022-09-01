@@ -70,7 +70,7 @@
 
 #notes
 {
-grid-column: 2/4;
+grid-column: 2/5;
 
 }
 
@@ -91,13 +91,14 @@ grid-column: 2/4;
 
 }
 
-.ProjectItem:hover
+.projectItem:hover
 {
     background-color: #e5e7eb;
 
 }
-li.ProjectItem{
+li.projectItem{
     font-size: 0.8em;
+    padding: 1vw;
 }
 
 .toDoDispDiv
@@ -115,4 +116,14 @@ border-bottom: #a3a3a3 dotted 1px;
 {
     text-decoration: line-through;
     color: rgba(139, 133, 133, 0.8);
+}
+
+.projectAdditiondiv
+{
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 1vw;
+    margin: 2vh;
+    text-align: center;
 }

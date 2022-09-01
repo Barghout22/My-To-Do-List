@@ -1,6 +1,7 @@
 import { deleteToDos } from "./object-creator";
+let duplicationPreventionLocal=0;
 //first function dynamically displays a form to capture new todos  
-export function displayAdditionForm(parentDiv){
+export function displayAdditionForm(parentDiv,projectList){
     
     const myToDoForm=document.createElement('div');
     myToDoForm.classList.add('displayForm');
@@ -54,11 +55,32 @@ export function displayAdditionForm(parentDiv){
     additionalNotes.value=" ";
     myToDoForm.appendChild(additionalNotes);
 
+    AddLabel("projects","select project: ",myToDoForm);
+    const projectSelector=document.createElement("select");
+    projectSelector.setAttribute("id","prjctSelect");
+    const defaultOption=new Option("no project","default");
+    projectSelector.add(defaultOption,undefined);
+
+    if((projectList.length)>0)
+    {
+        for(let i=0;i<(projectList.length);i++)
+        {
+            const newOption=new Option(`${projectList[i]}`,`${projectList[i]}`);
+            projectSelector.add(newOption,undefined);
+
+        
+        }
+        
+
+    }
+    myToDoForm.appendChild(projectSelector)
+
     const submitBttn=document.createElement("button");
     submitBttn.textContent="Add";
     submitBttn.type="button";
     submitBttn.classList.add("submissionButton");
     myToDoForm.appendChild(submitBttn);
+    
     
     
     parentDiv.appendChild(myToDoForm);
@@ -167,4 +189,76 @@ function AddLabel(inputName,displayText,parent)
     label.setAttribute("for",inputName);
     label.textContent=displayText;
     parent.appendChild(label);
+}
+
+
+export function addNewProject(projectList,parentDiv,parentListDisp)
+{
+if(duplicationPreventionLocal==0){
+    duplicationPreventionLocal++;
+
+const addProjectDiv=document.createElement('div');
+addProjectDiv.classList.add("projectAdditiondiv");
+
+AddLabel("newProject","new project:",addProjectDiv);
+const projectInput=document.createElement("input");
+projectInput.type="text";
+projectInput.setAttribute("id","newProject");
+projectInput.name="newProject";
+projectInput.value=" ";
+addProjectDiv.appendChild(projectInput);
+
+const addProjBttn=document.createElement("button");
+addProjBttn.textContent="Add";
+addProjBttn.type="button";
+addProjBttn.classList.add("addingProjectBtn");
+addProjectDiv.appendChild(addProjBttn);
+
+parentDiv.appendChild(addProjectDiv);
+
+addProjBttn.addEventListener("click",()=>{
+    if (projectInput.value===' ')
+    {
+        alert("please enter a name for the new project");
+    }
+    else{
+        projectList.push(projectInput.value);
+        //console.log(projectList);
+        duplicationPreventionLocal=0;
+        displaySideBarProjects(projectList,parentListDisp,parentDiv);
+        parentDiv.removeChild(addProjectDiv);
+
+    }
+});
+
+}
+}
+
+export function displaySideBarProjects(projectList,parent,mainDisp)
+{
+    clearDivContainer(parent);
+    if((projectList.length)!==0){
+for(let i=0;i<(projectList.length);i++)
+{
+    const projectItem=document.createElement("li");
+    projectItem.classList.add("projectItem");
+    projectItem.setAttribute("id",projectList[i]);
+    projectItem.textContent=projectList[i];
+   // console.log(projectItem);
+
+    parent.appendChild(projectItem);
+
+projectItem.addEventListener('click',()=>{
+    console.log(projectItem['id'])
+});
+}}
+const projectAdder=document.createElement("li")
+projectAdder.classList.add("projectItem");
+projectAdder.classList.add("sidebarItem");
+projectAdder.setAttribute("id","projectAddition");
+projectAdder.textContent="Add new Project  +";
+parent.appendChild(projectAdder);
+projectAdder.addEventListener('click',()=>{
+    addNewProject(projectList,mainDisp,parent)});
+
 }

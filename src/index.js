@@ -1,11 +1,15 @@
 import './style.css';
-import {updateNewTodosToList,listOfToDos} from "./object-creator";
-import{displayAdditionForm,DisplayToDo,clearDivContainer} from "./div-manipulations";
+import {updateNewTodosToList,listOfToDos,projectList,getProjectItems} from "./object-creator";
+import{displayAdditionForm,DisplayToDo,clearDivContainer,addNewProject,displaySideBarProjects} from "./div-manipulations";
 
 let duplicationPrevention=0; 
 
 const mainDisplay=document.querySelector(".mainDisplay");
 const todoAddbtn=document.querySelector(".addToDos");
+
+const displayedProjects=document.querySelector(".projectList");
+
+displaySideBarProjects(projectList,displayedProjects);
 
 DisplayToDo(mainDisplay,listOfToDos);
 
@@ -13,7 +17,7 @@ todoAddbtn.addEventListener('click',()=>{
   if(duplicationPrevention===0)
   {
     duplicationPrevention++;
-    displayAdditionForm(mainDisplay);
+    displayAdditionForm(mainDisplay,projectList);
   }
   const submit=document.querySelector(".submissionButton");
   submit.addEventListener('click',()=>{
@@ -31,7 +35,12 @@ else
     //   document.getElementById("dueDate").value="today";
     // }
 
-    updateNewTodosToList((document.getElementById("title").value),(document.getElementById("priorty").value),(document.getElementById("notes").value),(document.getElementById("dueDate").value),(document.getElementById("dueTime").value));
+    updateNewTodosToList((document.getElementById("title").value),
+    (document.getElementById("priorty").value),
+    (document.getElementById("notes").value),
+    (document.getElementById("dueDate").value),
+    (document.getElementById("dueTime").value),
+    (document.getElementById("prjctSelect").value));
     clearDivContainer(mainDisplay);
     DisplayToDo(mainDisplay,listOfToDos);
     duplicationPrevention=0;
@@ -40,18 +49,35 @@ else
 
 });
 
-const SidebarBttns=document.querySelectorAll(".sidebarItem");
+const activeGoalsBttn=document.querySelector("#activeGoals");
 
-SidebarBttns.forEach(bttn=>bttn.addEventListener('click',()=>{
-  if(bttn['id']==='activeGoals')
-    {
-      clearDivContainer(mainDisplay);
-      DisplayToDo(mainDisplay,listOfToDos);
-    }
+activeGoalsBttn.addEventListener('click',()=>{
+  
+  clearDivContainer(mainDisplay);
+  DisplayToDo(mainDisplay,listOfToDos);
+});
 
-    else{
-    console.log("hello");
-  }
-}));
+const ProjectSet=document.querySelector(".projectList");
+
+displaySideBarProjects(projectList,ProjectSet,mainDisplay);
+
+// SidebarBttns.forEach(bttn=>bttn.addEventListener('click',()=>{
+//   if(bttn['id']==='activeGoals')
+//     {
+     
+//     }
+
+//     else if((bttn['id'])==='projectAddition'){
+//       clearDivContainer(mainDisplay);
+//       addNewProject(projectList,mainDisplay);
+//       displaySideBarProjects(projectList,displayedProjects);
+//       }
+
+//   else
+//   {
+
+
+//   }
+// }));
 
 
