@@ -1,4 +1,4 @@
-import { deleteToDos } from "./object-creator";
+import { deleteToDos,getProjectItems} from "./object-creator";
 let duplicationPreventionLocal=0;
 //first function dynamically displays a form to capture new todos  
 export function displayAdditionForm(parentDiv,projectList){
@@ -249,7 +249,10 @@ for(let i=0;i<(projectList.length);i++)
     parent.appendChild(projectItem);
 
 projectItem.addEventListener('click',()=>{
-    console.log(projectItem['id'])
+    //console.log(projectItem['id'])
+    const filteredList=getProjectItems(projectItem['id'])
+    clearDivContainer(mainDisp);
+    DisplayToDo(mainDisp,filteredList);
 });
 }}
 const projectAdder=document.createElement("li")
