@@ -19,10 +19,8 @@ export function displayAdditionForm(parentDiv,projectList){
     const priortySetter=document.createElement("select");
     priortySetter.setAttribute("id","priorty");
     const high=new Option("High","high");
-    const medium=new Option("Medium","medium");
     const low=new Option("Low","low");
     priortySetter.add(low,undefined);
-    priortySetter.add(medium,undefined);
     priortySetter.add(high,undefined);
     myToDoForm.appendChild(priortySetter);
 

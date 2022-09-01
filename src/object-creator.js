@@ -10,10 +10,9 @@ export function updateNewTodosToList(title,priorty,notes,dueDate,dueTime,project
     const newToDo=ToDoListItemCreator(title,priorty,notes,dueDate,dueTime,project);
 //    console.log(newToDo);
     listOfToDos.push(newToDo);
-    //console.log(listOfToDos);
-
+  //  console.log(listOfToDos);
     listOfToDos.sort(sortByDateAndPriorty);
-
+  //  console.log(listOfToDos);
 }
 
 export function deleteToDos(title)
@@ -36,12 +35,12 @@ export function getProjectItems(project)
 
 
 
-function sortByDateAndPriorty( a, b )
+function sortByDateAndPriorty(a, b)
 {
-if ( a.date < b.date){
+if ( a.dueDate < b.dueDate){
   return -1;
 }
-if ( a.date> b.date){
+if ( a.dueDate> b.dueDate){
   return 1;
 }
 if ( (a.priorty==="high")&& (b.priorty==="low")){
