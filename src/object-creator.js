@@ -13,4 +13,10 @@ export function updateNewTodosToList(title,priorty,notes,dueDate,dueTime)
     console.log(listOfToDos);
 }
 
-//export function deleteToDos()
+export function deleteToDos(title)
+{
+    const searchIndex=listOfToDos.findIndex((todo)=>todo.title==title);
+    console.log(searchIndex);
+    listOfToDos.splice(searchIndex,1);
+
+}

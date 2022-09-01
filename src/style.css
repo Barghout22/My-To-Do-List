@@ -96,6 +96,9 @@ grid-column: 2/4;
     background-color: #e5e7eb;
 
 }
+li.ProjectItem{
+    font-size: 0.8em;
+}
 
 .toDoDispDiv
 {
@@ -106,4 +109,10 @@ grid-template-columns: 8fr 1fr 1fr;
 gap: 0.5vw;
 border-bottom: #a3a3a3 dotted 1px;
 
+}
+
+.clearedTask
+{
+    text-decoration: line-through;
+    color: rgba(0, 0, 0, 0.8);
 }

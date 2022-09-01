@@ -1,3 +1,4 @@
+import { deleteToDos } from "./object-creator";
 //first function dynamically displays a form to capture new todos  
 export function displayAdditionForm(parentDiv){
     
@@ -30,6 +31,7 @@ export function displayAdditionForm(parentDiv){
     dueDate.name="dueDate";
    //let today=new Date();
    dueDate.value=new Date().toISOString().substring(0, 10);
+   dueDate.setAttribute("min",new Date().toISOString().substring(0, 10));
    //dueDate.value=`${today.getFullYear()}-${(today.getMonth()+1)}-${today.getDate()}`;
    
    myToDoForm.appendChild(dueDate);
@@ -86,7 +88,23 @@ for(let i=0;i<(toDoList.length);i++)
     const paragraphOne=document.createElement('div');
     const paragraphtwo=document.createElement('div');
 
-    paragraphOne.textContent=`${toDoList[i].dueDate}: ${toDoList[i].title}`+'   '+`--- due by(24 hour format): ${toDoList[i].dueTime} --priorty ${toDoList[i].priorty}`;
+    if((toDoList[i].dueDate)===(new Date().toISOString().substring(0, 10)))
+    {
+        paragraphOne.textContent="today:";
+
+    }
+
+    else
+    {
+        paragraphOne.textContent=`${toDoList[i].dueDate}:`;
+    }
+
+    paragraphOne.textContent+=` ${toDoList[i].title} priorty: ${toDoList[i].priorty}`;
+    if((toDoList[i].dueTime)!=="00:00")
+    {
+        paragraphOne.textContent+=`_____due by: ${toDoList[i].dueTime} o'clock`;
+    }
+
     paragraphtwo.textContent=`   Additional notes: ${toDoList[i].notes}`;
 
     const completedBttn=document.createElement("button");
@@ -106,6 +124,18 @@ for(let i=0;i<(toDoList.length);i++)
     todoDiv.appendChild(deleteBttn);
     todoDiv.appendChild(paragraphtwo);
     parentDiv.appendChild(todoDiv);
+
+    completedBttn.addEventListener("click",()=>{
+        todoDiv.classList.add("clearedTask");
+
+    });
+    deleteBttn.addEventListener("click",()=>
+    {
+        deleteToDos(title);
+        parentDiv.removeChild(todoDiv);
+    }
+    );
+
 }
 
 }

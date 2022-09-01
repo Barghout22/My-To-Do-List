@@ -2,6 +2,7 @@ import './style.css';
 import {updateNewTodosToList,listOfToDos} from "./object-creator";
 import{displayAdditionForm,DisplayToDo,clearDivContainer} from "./div-manipulations";
 
+let duplicationPrevention=0; 
 
 const mainDisplay=document.querySelector(".mainDisplay");
 const todoAddbtn=document.querySelector(".addToDos");
@@ -9,8 +10,11 @@ const todoAddbtn=document.querySelector(".addToDos");
 DisplayToDo(mainDisplay,listOfToDos);
 
 todoAddbtn.addEventListener('click',()=>{
+  if(duplicationPrevention===0)
+  {
+    duplicationPrevention++;
     displayAdditionForm(mainDisplay);
-
+  }
   const submit=document.querySelector(".submissionButton");
   submit.addEventListener('click',()=>{
     if(!((document.getElementById("title")).value))
@@ -30,7 +34,7 @@ else
     updateNewTodosToList((document.getElementById("title").value),(document.getElementById("priorty").value),(document.getElementById("notes").value),(document.getElementById("dueDate").value),(document.getElementById("dueTime").value));
     clearDivContainer(mainDisplay);
     DisplayToDo(mainDisplay,listOfToDos);
-
+    duplicationPrevention=0;
   }    
 });
 
