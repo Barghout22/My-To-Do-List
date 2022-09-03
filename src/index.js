@@ -62,7 +62,7 @@ activeGoalsBttn.addEventListener('click',()=>{
 
 const ProjectSet=document.querySelector(".projectList");
 
-displaySideBarProjects(projectList,ProjectSet,mainDisplay);
+displaySideBarProjects(projectList,ProjectSet,mainDisplay,listOfToDos);
 
 // SidebarBttns.forEach(bttn=>bttn.addEventListener('click',()=>{
 //   if(bttn['id']==='activeGoals')

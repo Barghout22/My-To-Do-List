@@ -1,4 +1,4 @@
-import { deleteToDos,getProjectItems} from "./object-creator";
+import { deleteToDos,getProjectItems,clearItemsOfProject} from "./object-creator";
 import { duplicationPrevention } from "./index";
 export let duplicationPreventionLocal=0;
 //first function dynamically displays a form to capture new todos  
@@ -88,10 +88,12 @@ export function displayAdditionForm(parentDiv,projectList){
 
 
 
+
+//function to display the tasks
 export function DisplayToDo(parentDiv,toDoList)
 {
 
-if(toDoList.length===0)
+if((toDoList.length)===0)
 {
     const introHeader=document.createElement("h3");
     introHeader.textContent="You have nothing to do yet! Add a task!";
@@ -191,7 +193,7 @@ function AddLabel(inputName,displayText,parent)
 }
 
 
-export function addNewProject(projectList,parentDiv,parentListDisp)
+export function addNewProject(projectList,parentDiv,parentListDisp,listOfToDos)
 {
 if(duplicationPreventionLocal==0){
     duplicationPreventionLocal++;
@@ -222,9 +224,10 @@ addProjBttn.addEventListener("click",()=>{
     }
     else{
         projectList.push(projectInput.value);
+        localStorage.setItem('storedProjects',JSON.stringify(projectList));
         //console.log(projectList);
         duplicationPreventionLocal=0;
-        displaySideBarProjects(projectList,parentListDisp,parentDiv);
+        displaySideBarProjects(projectList,parentListDisp,parentDiv,listOfToDos);
         parentDiv.removeChild(addProjectDiv);
 
     }
@@ -233,8 +236,9 @@ addProjBttn.addEventListener("click",()=>{
 }
 }
 
-export function displaySideBarProjects(projectList,parent,mainDisp)
+export function displaySideBarProjects(projectList,parent,mainDisp,listOfToDos)
 {
+    let deleteDivDuplicationPrevention=0;
     clearDivContainer(parent);
     if((projectList.length)!==0){
 for(let i=0;i<(projectList.length);i++)
@@ -243,18 +247,43 @@ for(let i=0;i<(projectList.length);i++)
     projectItem.classList.add("projectItem");
     projectItem.setAttribute("id",projectList[i]);
     projectItem.textContent=projectList[i];
+    const projectDltBttn=document.createElement('button');
+    projectDltBttn.classList.add("projectDeleteBtn");
+    projectDltBttn.setAttribute('id',i);
+    projectDltBttn.textContent='X';
+    projectItem.appendChild(projectDltBttn);
    // console.log(projectItem);
 
     parent.appendChild(projectItem);
+
+
 
 projectItem.addEventListener('click',()=>{
     duplicationPrevention=0;
     duplicationPreventionLocal=0
     //console.log(projectItem['id'])
-    const filteredList=getProjectItems(projectItem['id'])
-    clearDivContainer(mainDisp);
-    DisplayToDo(mainDisp,filteredList);
+    if(deleteDivDuplicationPrevention===0)
+    {
+        const filteredList=getProjectItems(projectItem['id'])
+        clearDivContainer(mainDisp);
+        DisplayToDo(mainDisp,filteredList);
+    }
+    deleteDivDuplicationPrevention=0;
 });
+
+projectDltBttn.addEventListener('click',()=>{
+    deleteDivDuplicationPrevention++;
+    const currentTodoList=clearItemsOfProject(projectList[projectDltBttn['id']]);
+    parent.removeChild(projectItem);
+    projectList.splice(projectDltBttn['id'],1);
+    localStorage.setItem('storedProjects',JSON.stringify(projectList));
+    clearDivContainer(mainDisp);
+    console.log(currentTodoList);
+    DisplayToDo(mainDisp,currentTodoList);
+
+
+});
+
 }}
 const projectAdder=document.createElement("li")
 projectAdder.classList.add("projectItem");
@@ -263,6 +292,6 @@ projectAdder.setAttribute("id","projectAddition");
 projectAdder.textContent="Add new Project  +";
 parent.appendChild(projectAdder);
 projectAdder.addEventListener('click',()=>{
-    addNewProject(projectList,mainDisp,parent)});
+    addNewProject(projectList,mainDisp,parent,listOfToDos)});
 
 }

@@ -1,9 +1,12 @@
+export let listOfToDos= JSON.parse(localStorage.getItem("storedToDos") || "[]");
+export let projectList=JSON.parse(localStorage.getItem("storedProjects") || "[]");
+
+
 const ToDoListItemCreator=(title,priorty,notes,dueDate,dueTime,project)=>
 {
 return{title,priorty,notes,dueDate,dueTime,project};
 }
 
-export const listOfToDos=[];
 
 export function updateNewTodosToList(title,priorty,notes,dueDate,dueTime,project)
 {
@@ -13,6 +16,7 @@ export function updateNewTodosToList(title,priorty,notes,dueDate,dueTime,project
   //  console.log(listOfToDos);
     listOfToDos.sort(sortByDateAndPriorty);
   //  console.log(listOfToDos);
+  localStorage.setItem('storedToDos',JSON.stringify(listOfToDos));
 }
 
 export function deleteToDos(title)
@@ -20,10 +24,10 @@ export function deleteToDos(title)
     const searchIndex=listOfToDos.findIndex((todo)=>todo.title==title);
   //  console.log(searchIndex);
     listOfToDos.splice(searchIndex,1);
+    localStorage.setItem('storedToDos',JSON.stringify(listOfToDos));
 
 }
 
-export const projectList=[];
 
 export function getProjectItems(project)
 {
@@ -31,6 +35,14 @@ export function getProjectItems(project)
 
     return filteredList;
 
+}
+
+export function clearItemsOfProject(project)
+{
+  listOfToDos=listOfToDos.filter(task=>task.project!==project);
+  const replicaOfToDolist=listOfToDos;
+  localStorage.setItem('storedToDos',JSON.stringify(listOfToDos));
+return replicaOfToDolist;
 }
 
 
