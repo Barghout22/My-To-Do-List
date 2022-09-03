@@ -18,7 +18,7 @@
     width: 100vw;
     height: 100vh;
     display: grid;
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: 2fr 6fr;
     grid-template-rows: 1fr 8fr;
     padding: 0;
 
@@ -99,6 +99,8 @@ grid-column: 2/5;
 li.projectItem{
     font-size: 0.8em;
     padding: 1vw;
+    display: flex;
+    justify-content: space-between;
 }
 
 .toDoDispDiv
@@ -114,7 +116,6 @@ border-bottom: #a3a3a3 dotted 1px;
 
 .clearedTask
 {
-    text-decoration: line-through;
     color: rgba(139, 133, 133, 0.8);
 }
 
@@ -126,4 +127,39 @@ border-bottom: #a3a3a3 dotted 1px;
     gap: 1vw;
     margin: 2vh;
     text-align: center;
+}
+
+.highPriorty{
+    background-color: red;
+}
+
+.lowPriorty{
+    background-color: yellow;
+
+}
+
+.clearedTaskPriorty
+{
+    background-color: green;
+    text-decoration: none;
+}
+
+.toDoDispDiv{
+    display: grid;
+    grid-template-columns: 1fr 4fr 3fr 1fr 1fr;
+    text-align: center;
+    gap: 2vw;
+
+
+}
+
+.lowerDivPartition
+{
+    grid-column: 1/4;
+    text-align: start;
+}
+
+.titleDiv
+{
+    text-align: start;
 }

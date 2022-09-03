@@ -104,31 +104,61 @@ else{
 for(let i=0;i<(toDoList.length);i++)
 {
     const todoDiv=document.createElement('div');
-    const title=toDoList[i].title;
     todoDiv.classList.add("toDoDispDiv");
-    todoDiv.setAttribute("id",title);
+    todoDiv.setAttribute("id",toDoList[i].title);
+    const title=document.createElement('div');
+    title.classList.add('titleDiv');
+    title.textContent=toDoList[i].title;
 
-    const paragraphOne=document.createElement('div');
+
+    const priorty=document.createElement('div');
+    priorty.textContent=toDoList[i].priorty +' priorty';
+    if((toDoList[i].priorty)==='high')
+    {
+        priorty.classList.add('highPriorty');
+    }
+    else if((toDoList[i].priorty)==='low')
+    {
+        priorty.classList.add('lowPriorty');
+    }
+    const DueInfo=document.createElement('div');
+    DueInfo.textContent='due ';
+
+   
     const paragraphtwo=document.createElement('div');
+    paragraphtwo.classList.add('lowerDivPartition');
 
     if((toDoList[i].dueDate)===(new Date().toISOString().substring(0, 10)))
     {
-        paragraphOne.textContent="today:";
+        DueInfo.textContent+="today";
 
     }
 
     else
     {
-        paragraphOne.textContent=`${toDoList[i].dueDate}:`;
+        DueInfo.textContent+=`${toDoList[i].dueDate}:`;
     }
 
-    paragraphOne.textContent+=` ${toDoList[i].title} priorty: ${toDoList[i].priorty}`;
     if((toDoList[i].dueTime)!=="00:00")
     {
-        paragraphOne.textContent+=` due by: ${toDoList[i].dueTime} o'clock`;
+        if (((toDoList[i].dueTime).slice(0,2)-12)>0)
+        {
+            DueInfo.textContent+=` by ${((toDoList[i].dueTime).slice(0,2)-12)}${(toDoList[i].dueTime).slice(2)} pm`;
+
+        }
+        else if(((toDoList[i].dueTime).slice(0,2)-12)==0)
+        {
+            DueInfo.textContent+=` by ${toDoList[i].dueTime} pm`;
+
+        }
+        else
+        {
+            DueInfo.textContent+=` by ${toDoList[i].dueTime} am`;
+
+        }
     }
 
-    paragraphtwo.textContent=`   Additional notes: ${toDoList[i].notes}`;
+    paragraphtwo.textContent=`Additional notes:  ${toDoList[i].notes}`;
 
     const completedBttn=document.createElement("button");
     completedBttn.classList.add("questComplete");
@@ -148,7 +178,9 @@ for(let i=0;i<(toDoList.length);i++)
 
 
 
-    todoDiv.appendChild(paragraphOne);
+    todoDiv.appendChild(priorty);
+    todoDiv.appendChild(title);
+    todoDiv.appendChild(DueInfo);
     todoDiv.appendChild(completedBttn);
     todoDiv.appendChild(deleteBttn);
     todoDiv.appendChild(paragraphtwo);
@@ -156,6 +188,9 @@ for(let i=0;i<(toDoList.length);i++)
 
     completedBttn.addEventListener("click",()=>{
         todoDiv.classList.add("clearedTask");
+        priorty.className=' ';
+        priorty.classList.add('clearedTaskPriorty');
+        priorty.textContent="task complete";
 
     });
     deleteBttn.addEventListener("click",()=>
@@ -193,7 +228,7 @@ function AddLabel(inputName,displayText,parent)
 }
 
 
-export function addNewProject(projectList,parentDiv,parentListDisp,listOfToDos)
+export function addNewProject(projectList,parentDiv,parentListDisp)
 {
 if(duplicationPreventionLocal==0){
     duplicationPreventionLocal++;
@@ -227,7 +262,7 @@ addProjBttn.addEventListener("click",()=>{
         localStorage.setItem('storedProjects',JSON.stringify(projectList));
         //console.log(projectList);
         duplicationPreventionLocal=0;
-        displaySideBarProjects(projectList,parentListDisp,parentDiv,listOfToDos);
+        displaySideBarProjects(projectList,parentListDisp,parentDiv);
         parentDiv.removeChild(addProjectDiv);
 
     }
@@ -236,7 +271,7 @@ addProjBttn.addEventListener("click",()=>{
 }
 }
 
-export function displaySideBarProjects(projectList,parent,mainDisp,listOfToDos)
+export function displaySideBarProjects(projectList,parent,mainDisp)
 {
     let deleteDivDuplicationPrevention=0;
     clearDivContainer(parent);
@@ -278,7 +313,7 @@ projectDltBttn.addEventListener('click',()=>{
     projectList.splice(projectDltBttn['id'],1);
     localStorage.setItem('storedProjects',JSON.stringify(projectList));
     clearDivContainer(mainDisp);
-    console.log(currentTodoList);
+   // console.log(currentTodoList);
     DisplayToDo(mainDisp,currentTodoList);
 
 
@@ -292,6 +327,6 @@ projectAdder.setAttribute("id","projectAddition");
 projectAdder.textContent="Add new Project  +";
 parent.appendChild(projectAdder);
 projectAdder.addEventListener('click',()=>{
-    addNewProject(projectList,mainDisp,parent,listOfToDos)});
+    addNewProject(projectList,mainDisp,parent)});
 
 }
